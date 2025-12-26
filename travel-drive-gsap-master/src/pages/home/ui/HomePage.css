@@ -1,0 +1,590 @@
+.home {
+    min-height: 100vh;
+    color: #fff;
+    background: linear-gradient(180deg, #000000 80%, #4A2800 100%);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* контейнер */
+.wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* --- HERO SECTION --- */
+/* --- HERO SECTION --- */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80vh;
+    padding-top: 100px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 500px;
+    z-index: 2;
+}
+
+.subtitle {
+    color: #FA8305;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: none;
+    /* As in design */
+    display: block;
+    margin-bottom: 15px;
+}
+
+.hero-title {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 30px;
+    color: #fff;
+    background: none;
+    -webkit-text-fill-color: initial;
+}
+
+.hero-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 40px;
+    max-width: 450px;
+}
+
+.btn-primary {
+    padding: 16px 32px;
+    border-radius: 30px;
+    border: none;
+    background: #FA8305;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: none;
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #fb9e3c;
+    transform: none;
+}
+
+.hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* Убираем pointer-events: none, чтобы можно было взаимодействовать если надо */
+}
+
+.hero-main-img {
+    max-width: 120%;
+    /* Увеличим немного */
+    width: 600px;
+    height: auto;
+    object-fit: contain;
+    /* Интегрируем черный фон в темную тему */
+    /* Убрал анимацию float для статичности как на макете, или оставим если надо */
+    animation: float 4s ease-in-out infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    width: 90px;
+    height: 160px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    /* Make black SVGs white */
+}
+
+/* Floating Logos Styles */
+.floating-logo {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.floating-logo svg {
+    width: 30px;
+    height: 30px;
+}
+
+/* Positioning logos around the gamepad */
+.unity {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.cryengine {
+    top: 10%;
+    left: 20%;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.unreal {
+    top: 10%;
+    right: 10%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.unreal-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    font-size: 14px;
+}
+
+.unreal-text .small {
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 60px;
+    }
+
+    .hero-image-container {
+        width: 100%;
+    }
+
+    .hero-main-img {
+        width: 80%;
+    }
+
+    /* Adjust logos for mobile */
+    .unity {
+        left: 0;
+    }
+
+    .cryengine {
+        left: 10%;
+        top: 0;
+    }
+
+    .unreal {
+        right: 10%;
+        top: 0;
+    }
+}
+
+/* --- TRENDING GAMES --- */
+.trending {
+    padding: 80px 40px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.trending-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+.game-card {
+    background: transparent;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.card-info {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* --- ABOUT SECTION --- */
+.about {
+    padding: 100px 40px;
+    text-align: center;
+    background: radial-gradient(circle at center, rgba(250, 131, 5, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.about-text-center {
+    margin-bottom: 60px;
+}
+
+.about-text-center h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.about-text-center p {
+    font-size: 16px;
+    color: #A0A0A0;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.about-city-image {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-top: 40px;
+    position: relative;
+}
+
+.about-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.about-city-image:hover .about-video {
+    transform: scale(1.02);
+}
+
+.about-city-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    transition: transform 0.5s ease;
+}
+
+.about-city-image:hover img {
+    transform: scale(1.02);
+}
+
+/* --- FEATURES SECTION --- */
+.features-section {
+    padding: 120px 0 160px;
+    background-image: url('../../../shared/assets/images/homePage/home-page-section-4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    /* Затемнение фона */
+}
+
+/* Слой затемнения */
+.features-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+}
+
+.features-section .wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.features-intro {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.features-intro h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+}
+
+.features-intro p {
+    color: #ccc;
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.features-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: center;
+}
+
+.features-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 60px;
+    width: 100%;
+}
+
+.features-row-center {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    width: 200px;
+    /* fix width for alignment */
+    text-align: center;
+}
+
+.feature-icon-circle {
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FA8305;
+    /* Основной цвет иконок */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-icon-circle svg {
+    width: 32px;
+    height: 32px;
+}
+
+.feature-item:hover .feature-icon-circle {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.feature-item span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.feature-item .arrow {
+    color: #FA8305;
+    font-size: 24px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s;
+}
+
+.feature-item:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 1024px) {
+
+    .features-row,
+    .features-row-center {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .features-row,
+    .features-row-center {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-item {
+        width: auto;
+    }
+}
+
+/* --- PROJECTS SECTION --- */
+.projects {
+    padding: 100px 40px;
+    text-align: center;
+}
+
+.section-header-center {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header-center h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.section-subtitle {
+    color: #cccccc;
+    max-width: 500px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 80px;
+    /* Increased margin for offset items */
+}
+
+.project-item {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Default aspect ratio */
+.project-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+    border-radius: 20px;
+}
+
+/* Varying sizes and offsets for "organic" look */
+.project-item:nth-child(1) {
+    aspect-ratio: 16 / 10;
+}
+
+.project-item:nth-child(2) {
+    aspect-ratio: 4 / 3;
+    transform: translateY(40px);
+    /* Shift down middle-top */
+}
+
+.project-item:nth-child(3) {
+    aspect-ratio: 16 / 10;
+}
+
+.project-item:nth-child(4) {
+    aspect-ratio: 16 / 12;
+    transform: translateY(-30px);
+    /* Shift up left-bottom */
+}
+
+.project-item:nth-child(5) {
+    aspect-ratio: 16 / 10;
+    transform: translateY(40px);
+    /* Shift down middle-bottom */
+}
+
+.project-item:nth-child(6) {
+    aspect-ratio: 4 / 3;
+    transform: translateY(-20px);
+    /* Shift up right-bottom */
+}
+
+
+.project-item:hover img {
+    transform: scale(1.1);
+}
+
+.projects-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.btn-see-all {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-see-all:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .project-item:nth-child(n) {
+        transform: none !important;
+        /* Reset offsets on tablet */
+        aspect-ratio: 16/10;
+    }
+}
+
+@media (max-width: 600px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
