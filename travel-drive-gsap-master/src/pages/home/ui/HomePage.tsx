@@ -3,13 +3,28 @@ import heroImage from "@shared/assets/images/homePage/gamepad_hero.png";
 import logoUnity from "@shared/assets/logo/unity.svg";
 import logoCry from "@shared/assets/logo/cryengine.svg";
 import logoUnreal from "@shared/assets/logo/unreal.svg";
+import forHonorImage from "@shared/assets/images/homePage/forhonor.png";
+import forHonorVideo from "@shared/assets/videos/forhonor.mp4";
+import battlefieldImage from "@shared/assets/images/homePage/battlefield-6.jpg";
+import battlefieldVideo from "@shared/assets/videos/Battlefield.mp4";
+import eldenRingImage from "@shared/assets/images/homePage/eldenring.png";
+import eldenRingVideo from "@shared/assets/videos/eldenring.mp4";
+import cyberpunkImage from "@shared/assets/images/homePage/Cyberpunk_2077.jpg";
+import cyberpunkVideo from "@shared/assets/videos/cyberpunk.mp4";
+import ubisoftLogo from "@shared/assets/images/homePage/ubisoft.jpg";
+import crytekLogo from "@shared/assets/images/homePage/crytek.jpg";
+import epicGamesLogo from "@shared/assets/images/homePage/epicgames.png";
+import creativeAssemblyLogo from "@shared/assets/images/homePage/creativeassembly.png";
+import embarkLogo from "@shared/assets/images/homePage/embark.png";
+import warhorseLogo from "@shared/assets/images/homePage/warhorse.png";
+import gameVideo from "@shared/assets/videos/game.mp4";
 
-// Временные заглушки для картинок игр, пока используем плейсхолдеры или те же ассеты
-const TRENDING_GAMES = [
-    { id: 1, title: "40 Followers", image: "https://placehold.co/300x400/1a1a1a/FFF?text=Game+1" },
-    { id: 2, title: "40 Followers", image: "https://placehold.co/300x400/2a2a2a/FFF?text=Game+2" },
-    { id: 3, title: "40 Followers", image: "https://placehold.co/300x400/3a3a3a/FFF?text=Game+3" },
-    { id: 4, title: "40 Followers", image: "https://placehold.co/300x400/4a4a4a/FFF?text=Game+4" },
+// Любимые игры студентов
+const FAVORITE_GAMES = [
+    { id: 1, title: "For Honor", stats: "3.2K Fans", image: forHonorImage, video: forHonorVideo },
+    { id: 2, title: "Battlefield 6", stats: "2.8K Fans", image: battlefieldImage, video: battlefieldVideo },
+    { id: 3, title: "Elden Ring", stats: "4.1K Fans", image: eldenRingImage, video: eldenRingVideo },
+    { id: 4, title: "Cyberpunk 2077", stats: "2.5K Fans", image: cyberpunkImage, video: cyberpunkVideo },
 ];
 
 export const HomePage = () => {
@@ -48,20 +63,44 @@ export const HomePage = () => {
                 </div>
             </section>
 
-            {/* TRENDING GAMES SECTION */}
+            {/* STUDENTS' FAVORITE GAMES SECTION */}
             <section className="trending wrapper">
                 <div className="section-header">
-                    <h2>Currently Trending Games</h2>
+                    <h2>Students' Favorite Games</h2>
                     <button className="btn-secondary">SEE ALL</button>
                 </div>
                 <div className="trending-grid">
-                    {TRENDING_GAMES.map((game) => (
-                        <div key={game.id} className="game-card">
+                    {FAVORITE_GAMES.map((game) => (
+                        <div
+                            key={game.id}
+                            className="game-card"
+                            onMouseEnter={(e) => {
+                                const video = e.currentTarget.querySelector('.card-video') as HTMLVideoElement;
+                                if (video) video.play();
+                            }}
+                            onMouseLeave={(e) => {
+                                const video = e.currentTarget.querySelector('.card-video') as HTMLVideoElement;
+                                if (video) {
+                                    video.pause();
+                                    video.currentTime = 0;
+                                }
+                            }}
+                        >
                             <div className="card-image">
-                                <img src={game.image} alt={game.title} />
+                                <img src={game.image} alt={game.title} className="card-img" />
+                                {game.video && (
+                                    <video
+                                        className="card-video"
+                                        src={game.video}
+                                        loop
+                                        muted
+                                        playsInline
+                                    />
+                                )}
                             </div>
                             <div className="card-info">
-                                <span>🔥 {game.title}</span>
+                                <span className="game-title">{game.title}</span>
+                                <span className="game-stats">❤️ {game.stats}</span>
                             </div>
                         </div>
                     ))}
@@ -99,6 +138,14 @@ export const HomePage = () => {
             <section
                 className="features-section"
             >
+                <video
+                    className="features-bg-video"
+                    src={gameVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                />
                 <div className="wrapper">
                     <div
                         className="features-intro"
@@ -175,40 +222,40 @@ export const HomePage = () => {
                 </div>
             </section>
 
-            {/* RECENT PROJECTS SECTION */}
+            {/* COMPANIES SECTION - Where Our Students Work */}
             <section className="projects wrapper">
                 <div className="section-header-center">
-                    <h2>Our Recent Projects</h2>
+                    <h2>Where Our Students Work</h2>
                     <p className="section-subtitle">
-                        Explore our latest releases and see what we've been working on.
+                        Our graduates are employed at leading game development studios worldwide.
                     </p>
                 </div>
 
                 <div className="projects-grid">
                     {/* Row 1 */}
-                    <div className="project-item">
-                        <img src="/src/shared/assets/images/homePage/home-page-section-3.jpg" alt="Project 1" />
+                    <div className="project-item company-logo">
+                        <img src={ubisoftLogo} alt="Ubisoft" />
                     </div>
-                    <div className="project-item">
-                        <img src="/src/shared/assets/images/homePage/home-page-section-5.jpg" alt="Project 2" />
+                    <div className="project-item company-logo">
+                        <img src={crytekLogo} alt="Crytek" />
                     </div>
-                    <div className="project-item">
-                        <img src="/src/shared/assets/images/homePage/home-page-section-2.jpg" alt="Project 3" />
+                    <div className="project-item company-logo">
+                        <img src={epicGamesLogo} alt="Epic Games" />
                     </div>
                     {/* Row 2 */}
-                    <div className="project-item">
-                        <img src="/src/shared/assets/images/homePage/home-page-section-5.jpg" alt="Project 4" />
+                    <div className="project-item company-logo">
+                        <img src={creativeAssemblyLogo} alt="Creative Assembly" />
                     </div>
-                    <div className="project-item">
-                        <img src="/src/shared/assets/images/homePage/home-page-section-3.jpg" alt="Project 5" />
+                    <div className="project-item company-logo">
+                        <img src={embarkLogo} alt="Embark Studios" />
                     </div>
-                    <div className="project-item">
-                        <img src="/src/shared/assets/images/homePage/home-page-section-2.jpg" alt="Project 6" />
+                    <div className="project-item company-logo">
+                        <img src={warhorseLogo} alt="Warhorse Studios" />
                     </div>
                 </div>
 
                 <div className="projects-action">
-                    <button className="btn-see-all">SEE ALL</button>
+                    <button className="btn-see-all">VIEW ALL PARTNERS</button>
                 </div>
             </section>
 

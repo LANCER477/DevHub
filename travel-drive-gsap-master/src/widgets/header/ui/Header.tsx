@@ -1,9 +1,24 @@
 import { useState } from 'react';
+import { useEffect } from "react";
 import './Header.css';
 import logo from '@shared/assets/logo/logo4epuha-white.png';
 import { Link, useLocation } from 'react-router-dom';
 
 export const Header = () => {
+
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
+
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
 
@@ -14,7 +29,7 @@ export const Header = () => {
     const isActive = (path: string) => location.pathname === path ? 'active' : '';
 
     return (
-        <header className="header">
+        <header className={`header ${scrolled ? "scrolled" : ""}`}>
             <div className="header-left">
                 <Link to="/" className="logo">
                     <img src={logo} alt="logo" />

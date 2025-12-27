@@ -238,27 +238,68 @@
     transform: translateY(-5px);
 }
 
-.card-image img {
+.card-image {
+    position: relative;
     width: 100%;
     height: 320px;
+}
+
+.card-img,
+.card-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 16px;
+    transition: opacity 0.5s ease;
+}
+
+.card-img {
+    opacity: 1;
+    z-index: 1;
+}
+
+.card-video {
+    opacity: 0;
+    z-index: 2;
+}
+
+.game-card:hover .card-img {
+    opacity: 0;
+}
+
+.game-card:hover .card-video {
+    opacity: 1;
 }
 
 .card-info {
     margin-top: 15px;
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.game-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.game-stats {
     font-size: 14px;
-    color: #ccc;
+    color: #FA8305;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 /* --- ABOUT SECTION --- */
 .about {
     padding: 100px 40px;
     text-align: center;
-    background: radial-gradient(circle at center, rgba(250, 131, 5, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle at center, rgba(250, 131, 5, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
 }
 
 .about-text-center {
@@ -266,17 +307,25 @@
 }
 
 .about-text-center h3 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 20px;
+    font-size: 40px;
+    /* было ~24px */
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 24px;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
 }
 
 .about-text-center p {
-    font-size: 16px;
-    color: #A0A0A0;
-    max-width: 600px;
+    font-size: 18px;
+    /* было 16px */
+    line-height: 1.75;
+    color: rgba(220, 220, 220, 0.9);
+    max-width: 720px;
     margin: 0 auto;
-    line-height: 1.6;
+    letter-spacing: 0.01em;
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.7);
 }
 
 .about-city-image {
@@ -315,22 +364,21 @@
 /* --- FEATURES SECTION --- */
 .features-section {
     padding: 120px 0 160px;
-    background-image: url('../../../shared/assets/images/homePage/home-page-section-4.jpg');
+    /* фон можно оставить как fallback, можно удалить */
+    /* background-image: url('../../../shared/assets/images/homePage/home-page-section-4.jpg'); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    /* Затемнение фона */
+    overflow: hidden;
+    /* чтобы видео не вылезало за края */
 }
 
-/* Слой затемнения */
+/* затемнение поверх видео */
 .features-section::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.75);
     z-index: 1;
 }
@@ -338,6 +386,23 @@
 .features-section .wrapper {
     position: relative;
     z-index: 2;
+    /* контент выше оверлея и видео */
+}
+
+.features-bg-video {
+    position: absolute;
+    inset: 0;
+    /* top:0; right:0; bottom:0; left:0 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* займёт весь блок без искажений */
+    z-index: 0;
+    /* под overlay и контентом */
+    filter: brightness(0.6);
+    /* лёгкое затемнение + сверху ещё ::before */
+    pointer-events: none;
+    /* чтобы мышь "проходила" к кнопкам/айтемам */
 }
 
 .features-intro {
@@ -346,22 +411,35 @@
 }
 
 .features-intro h3 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 24px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    color: #fff;
+    font-size: 44px;
+    /* было 32px */
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    text-align: center;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.85);
+    /* читается лучше на видео */
 }
 
 .features-intro p {
-    color: #ccc;
-    max-width: 600px;
-    margin: 0 auto;
-    font-size: 16px;
-    line-height: 1.6;
+    font-size: 18px;
+    /* было 16px */
+    line-height: 1.7;
+    color: rgba(230, 230, 230, 0.9);
+    max-width: 640px;
+    margin: 12px auto 0;
+    text-shadow: 0 3px 14px rgba(0, 0, 0, 0.9);
 }
+
+/* подписи под иконками – чуть крупнее и почище */
+.feature-item span {
+    font-size: 17px;
+    /* было 16px */
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
 
 .features-grid-container {
     display: flex;
@@ -438,6 +516,19 @@
     transform: translateX(0);
 }
 
+@media (min-width: 1440px) {
+    .features-intro h3 {
+        max-width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .features-intro p {
+        max-width: 620px;
+    }
+}
+
+
 @media (max-width: 1024px) {
 
     .features-row,
@@ -448,6 +539,16 @@
 
 @media (max-width: 768px) {
 
+    .features-intro h3 {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    .features-intro p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
     .features-row,
     .features-row-center {
         flex-direction: column;
@@ -456,6 +557,14 @@
 
     .feature-item {
         width: auto;
+    }
+
+    .about-text-center h3 {
+        font-size: 28px;
+    }
+
+    .about-text-center p {
+        font-size: 16px;
     }
 }
 
@@ -467,29 +576,34 @@
 
 .section-header-center {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .section-header-center h2 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 20px;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+    color: #fff;
 }
 
 .section-subtitle {
-    color: #cccccc;
-    max-width: 500px;
+    color: #b0b0b0;
+    max-width: 600px;
     margin: 0 auto;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 400;
 }
 
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-bottom: 80px;
-    /* Increased margin for offset items */
+    gap: 24px;
+    margin-bottom: 60px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .project-item {
@@ -547,6 +661,40 @@
     transform: scale(1.1);
 }
 
+/* Company logo specific styles */
+.company-logo {
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 40px;
+    aspect-ratio: 16 / 9 !important;
+    transform: none !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.company-logo img {
+    object-fit: contain !important;
+    width: 140px;
+    height: 70px;
+    filter: brightness(0.85) grayscale(0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.company-logo:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: rgba(250, 131, 5, 0.3);
+    box-shadow: 0 12px 40px rgba(250, 131, 5, 0.15),
+        0 0 0 1px rgba(250, 131, 5, 0.1);
+}
+
+.company-logo:hover img {
+    filter: brightness(1) grayscale(0);
+    transform: scale(1.1);
+}
+
 .projects-action {
     display: flex;
     justify-content: center;
@@ -554,21 +702,25 @@
 }
 
 .btn-see-all {
-    background: rgba(255, 255, 255, 0.1);
+    background: #FA8305;
     color: #fff;
     border: none;
-    padding: 14px 40px;
-    border-radius: 8px;
+    padding: 16px 36px;
+    border-radius: 50px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
-    transition: background 0.3s, transform 0.2s;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(250, 131, 5, 0.3);
+    max-width: 240px;
 }
 
 .btn-see-all:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+    background: #ff9520;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(250, 131, 5, 0.4);
 }
 
 @media (max-width: 900px) {
