@@ -379,7 +379,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 
@@ -663,23 +663,27 @@
 
 /* Company logo specific styles */
 .company-logo {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 50px 40px;
+    padding: 30px;
     aspect-ratio: 16 / 9 !important;
     transform: none !important;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    min-height: 180px;
 }
 
 .company-logo img {
-    object-fit: contain !important;
-    width: 140px;
-    height: 70px;
-    filter: brightness(0.85) grayscale(0.3);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    /* сохраняем пропорции, теперь с безопасным отступом */
+    padding: 0;
+    display: block;
 }
 
 .company-logo:hover {
@@ -721,6 +725,86 @@
     background: #ff9520;
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(250, 131, 5, 0.4);
+}
+
+.companies-slider {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.companies-window {
+    flex: 1;
+    max-width: 900px;
+    overflow: hidden;
+}
+
+.companies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* стрелки */
+.companies-arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.25s ease;
+}
+
+.companies-arrow:hover {
+    background: #FA8305;
+    border-color: #FA8305;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(250, 131, 5, 0.35);
+}
+
+/* пагинация */
+.companies-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 32px;
+}
+
+.companies-dot {
+    width: 36px;
+    height: 4px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.companies-dot.active {
+    width: 52px;
+    background: #FA8305;
+}
+
+.companies-dot:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+@media (max-width: 900px) {
+    .companies-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .companies-slider {
+        gap: 12px;
+    }
 }
 
 @media (max-width: 900px) {

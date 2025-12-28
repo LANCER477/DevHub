@@ -7,6 +7,7 @@ import videoAvatar from "@shared/assets/videos/avatar.mp4";
 import videoRdr2 from "@shared/assets/videos/sifu.mp4";
 import videoDevs from "@shared/assets/videos/devs.mp4";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const AboutPage = () => {
     const videos = [videoAvatar, videoRdr2];
@@ -40,7 +41,9 @@ export const AboutPage = () => {
                 {/* HERO SECTION */}
                 <section className="about-hero" data-aos="fade-up">
                     <div className="about-hero-content">
-                        <span className="about-breadcrumb">Home &gt; About us</span>
+                        <div className="about-breadcrumb">
+                            <Link to="/">Home</Link> &gt; <Link to="/about" className="active-breadcrumb">About us</Link>
+                        </div>
                         <h1>Crafting Worlds Beyond Imagination</h1>
                         <p>
                             We are a collective of visionary developers, artists, and storytellers. At 4epuha, we don't just build games; we forge immersive experiences that challenge the boundaries of interactive entertainment and redefine what's possible in the digital realm.

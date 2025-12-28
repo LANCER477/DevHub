@@ -22,11 +22,22 @@
 }
 
 .about-breadcrumb {
-    color: #FA8305;
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 20px;
-    display: block;
+    display: flex;
+    gap: 8px;
+}
+
+.about-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.about-breadcrumb a:hover,
+.active-breadcrumb {
+    color: #FA8305;
 }
 
 .about-hero h1 {

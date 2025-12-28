@@ -1,6 +1,10 @@
+import mehImg from "@shared/assets/images/servicesPage/meh.jpg";
+import modelImg from "@shared/assets/images/servicesPage/model.png";
+import levelImg from "@shared/assets/images/servicesPage/level.jpg";
 import "./ServicesPage.css";
-import videoNinja from "@shared/assets/videos/ninjagaiden.mp4";
+import videoNinja from "@shared/assets/videos/wh.mp4";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const ServicesPage = () => {
     const testimonials = [
@@ -46,7 +50,7 @@ export const ServicesPage = () => {
     const [isTransitioning, setIsTransitioning] = useState(false);
     const testimonialsPerPage = 3;
     const maxIndex = Math.max(0, testimonials.length - testimonialsPerPage);
-    const totalPages = Math.ceil(testimonials.length / testimonialsPerPage);
+    const totalPages = maxIndex + 1;
 
     const handlePrevTestimonial = () => {
         if (isTransitioning) return;
@@ -76,32 +80,64 @@ export const ServicesPage = () => {
     };
 
     const visibleTestimonials = testimonials.slice(currentTestimonial, currentTestimonial + testimonialsPerPage);
-    const currentPage = Math.floor(currentTestimonial / testimonialsPerPage);
+    const currentPage = currentTestimonial;
     return (
         <div className="services-page">
             <div className="wrapper">
 
                 {/* HERO & STATS */}
                 <section className="services-hero" data-aos="fade-down">
-                    <span className="services-breadcrumb">Home &gt; Services</span>
-                    <h1>We Build Digital Realities</h1>
-                    <p>
-                        From concept to final render, we provide comprehensive game development services.
-                        Our expertise spans across genres, engines, and platforms.
-                    </p>
+                    <div className="services-hero-content">
+                        <div className="services-breadcrumb">
+                            <Link to="/">Home</Link> &gt; <Link to="/services" className="active-breadcrumb">Services</Link>
+                        </div>
+                        <h1>Lorem Ipsum is simply dummy text of the printing and.</h1>
+                        <p className="hero-subtitle">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        </p>
+                    </div>
 
-                    <div className="stats-container">
-                        <div className="stat-card">
-                            <span className="stat-number">90+</span>
-                            <span className="stat-label">Clients</span>
-                        </div>
-                        <div className="stat-card">
-                            <span className="stat-number">30+</span>
-                            <span className="stat-label">Countries</span>
-                        </div>
-                        <div className="stat-card">
-                            <span className="stat-number">50+</span>
-                            <span className="stat-label">Projects</span>
+                    <div className="stats-box-wrapper">
+                        <div className="stats-container">
+                            <div className="stat-card">
+                                <div className="stat-icon-wrapper">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                    </svg>
+                                </div>
+                                <div className="stat-info">
+                                    <span className="stat-number">90+</span>
+                                    <span className="stat-label">Clients</span>
+                                </div>
+                            </div>
+
+                            <div className="stat-divider"></div>
+
+                            <div className="stat-card">
+                                <div className="stat-icon-wrapper">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                    </svg>
+                                </div>
+                                <div className="stat-info">
+                                    <span className="stat-number">30+</span>
+                                    <span className="stat-label">Countries</span>
+                                </div>
+                            </div>
+
+                            <div className="stat-divider"></div>
+
+                            <div className="stat-card">
+                                <div className="stat-icon-wrapper">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M20 13H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2zm0-9H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM7 19c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM7 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+                                    </svg>
+                                </div>
+                                <div className="stat-info">
+                                    <span className="stat-number">50+</span>
+                                    <span className="stat-label">Projects</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -136,7 +172,8 @@ export const ServicesPage = () => {
                         <button className="block-btn">Read more</button>
                     </div>
                     <div className="block-media">
-                        <img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Environment Art" />
+                        <img src={levelImg} alt="Environment Art" />
+
                     </div>
                 </section>
 
@@ -150,7 +187,7 @@ export const ServicesPage = () => {
                         <button className="block-btn">Read more</button>
                     </div>
                     <div className="block-media">
-                        <img src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Character Art" />
+                        <img src={modelImg} alt="Character Art" />
                     </div>
                 </section>
 
@@ -164,7 +201,7 @@ export const ServicesPage = () => {
                         <button className="block-btn">Read more</button>
                     </div>
                     <div className="block-media">
-                        <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Programming" />
+                        <img src={mehImg} alt="Programming" />
                     </div>
                 </section>
 

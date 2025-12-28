@@ -48,14 +48,25 @@ export const Header = () => {
                 <Link to="/about" className={`nav-item ${isActive('/about')}`}>About us</Link>
                 <Link to="/services" className={`nav-item ${isActive('/services')}`}>Services</Link>
                 <div className="nav-item">News</div>
-                <div className="nav-item">Store</div>
+                <Link to="/store" className={`nav-item ${isActive('/store')}`}>Store</Link>
 
-                <div className="search-bar">
-                    <input type="text" placeholder="Search..." />
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
+                <div className="header-actions">
+                    <div className="search-bar">
+                        <input type="text" placeholder="Search..." />
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+
+                    <Link to="/store" className="cart-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span className="cart-badge">1</span>
+                    </Link>
                 </div>
 
                 <button className="btn-contact">Contact us</button>

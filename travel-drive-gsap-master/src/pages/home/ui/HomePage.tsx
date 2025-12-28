@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./HomePage.css";
 import heroImage from "@shared/assets/images/homePage/gamepad_hero.png";
 import logoUnity from "@shared/assets/logo/unity.svg";
@@ -27,7 +28,47 @@ const FAVORITE_GAMES = [
     { id: 4, title: "Cyberpunk 2077", stats: "2.5K Fans", image: cyberpunkImage, video: cyberpunkVideo },
 ];
 
+const COMPANIES = [
+    { id: 1, name: "Ubisoft", logo: ubisoftLogo },
+    { id: 2, name: "Crytek", logo: crytekLogo },
+    { id: 3, name: "Epic Games", logo: epicGamesLogo },
+    { id: 4, name: "Creative Assembly", logo: creativeAssemblyLogo },
+    { id: 5, name: "Embark Studios", logo: embarkLogo },
+    { id: 6, name: "Warhorse Studios", logo: warhorseLogo },
+];
+
+const LOGOS_PER_PAGE = 3;
+const TOTAL_LOGO_PAGES = Math.ceil(COMPANIES.length / LOGOS_PER_PAGE);
+
+
+
 export const HomePage = () => {
+
+    // слайдер компаний
+    const [currentLogoPage, setCurrentLogoPage] = useState(0);
+
+    const handlePrevLogos = () => {
+        setCurrentLogoPage((prev) =>
+            prev === 0 ? TOTAL_LOGO_PAGES - 1 : prev - 1
+        );
+    };
+
+    const handleNextLogos = () => {
+        setCurrentLogoPage((prev) =>
+            prev === TOTAL_LOGO_PAGES - 1 ? 0 : prev + 1
+        );
+    };
+
+    const handleLogoDotClick = (pageIndex: number) => {
+        setCurrentLogoPage(pageIndex);
+    };
+
+    const startIndex = currentLogoPage * LOGOS_PER_PAGE;
+    const visibleCompanies = COMPANIES.slice(
+        startIndex,
+        startIndex + LOGOS_PER_PAGE
+    );
+
     return (
         <div className="home">
             {/* HERO SECTION */}
@@ -231,27 +272,46 @@ export const HomePage = () => {
                     </p>
                 </div>
 
-                <div className="projects-grid">
-                    {/* Row 1 */}
-                    <div className="project-item company-logo">
-                        <img src={ubisoftLogo} alt="Ubisoft" />
+                <div className="companies-slider">
+                    <button
+                        className="companies-arrow"
+                        onClick={handlePrevLogos}
+                        aria-label="Previous companies"
+                    >
+                        ←
+                    </button>
+
+                    <div className="companies-window">
+                        <div className="companies-grid">
+                            {visibleCompanies.map((company) => (
+                                <div
+                                    key={company.id}
+                                    className={`project-item company-logo company-${company.name.toLowerCase().replace(/\s+/g, '-')}`}
+                                >
+                                    <img src={company.logo} alt={company.name} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <div className="project-item company-logo">
-                        <img src={crytekLogo} alt="Crytek" />
-                    </div>
-                    <div className="project-item company-logo">
-                        <img src={epicGamesLogo} alt="Epic Games" />
-                    </div>
-                    {/* Row 2 */}
-                    <div className="project-item company-logo">
-                        <img src={creativeAssemblyLogo} alt="Creative Assembly" />
-                    </div>
-                    <div className="project-item company-logo">
-                        <img src={embarkLogo} alt="Embark Studios" />
-                    </div>
-                    <div className="project-item company-logo">
-                        <img src={warhorseLogo} alt="Warhorse Studios" />
-                    </div>
+
+                    <button
+                        className="companies-arrow"
+                        onClick={handleNextLogos}
+                        aria-label="Next companies"
+                    >
+                        →
+                    </button>
+                </div>
+
+                <div className="companies-dots">
+                    {Array.from({ length: TOTAL_LOGO_PAGES }).map((_, index) => (
+                        <button
+                            key={index}
+                            className={`companies-dot ${currentLogoPage === index ? "active" : ""}`}
+                            onClick={() => handleLogoDotClick(index)}
+                            aria-label={`Go to companies page ${index + 1}`}
+                        />
+                    ))}
                 </div>
 
                 <div className="projects-action">

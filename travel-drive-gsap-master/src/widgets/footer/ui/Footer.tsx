@@ -1,5 +1,9 @@
 import './Footer.css';
 import logo from '@shared/assets/logo/logo4epuha-white.png';
+import xIcon from '@shared/assets/logo/X.jpg';
+import instIcon from '@shared/assets/logo/inst.jpg';
+import ytIcon from '@shared/assets/logo/youtube.jpg';
+import tgIcon from '@shared/assets/icons/telegram.png';
 
 export const Footer = () => {
     return (
@@ -47,10 +51,10 @@ export const Footer = () => {
                 </div>
 
                 <div className="footer-socials">
-                    <div className="social-icon">⚪</div>
-                    <div className="social-icon">⚪</div>
-                    <div className="social-icon">⚪</div>
-                    <div className="social-icon">⚪</div>
+                    <div className="social-icon"><img src={instIcon} alt="Instagram" /></div>
+                    <div className="social-icon"><img src={xIcon} alt="X" /></div>
+                    <div className="social-icon"><img src={ytIcon} alt="YouTube" /></div>
+                    <div className="social-icon"><img src={tgIcon} alt="Telegram" /></div>
                 </div>
             </div>
 
