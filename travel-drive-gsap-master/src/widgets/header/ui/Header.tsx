@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useEffect } from "react";
 import './Header.css';
 import logo from '@shared/assets/logo/logo4epuha-white.png';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export const Header = () => {
 
     const [scrolled, setScrolled] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const onScroll = () => {
@@ -69,7 +70,7 @@ export const Header = () => {
                     </Link>
                 </div>
 
-                <button className="btn-contact">Contact us</button>
+                <button className="btn-contact" onClick={() => navigate('/contact')}>Contact us</button>
             </div>
         </header>
     );

@@ -19,6 +19,7 @@ import creativeAssemblyLogo from "@shared/assets/images/homePage/creativeassembl
 import embarkLogo from "@shared/assets/images/homePage/embark.png";
 import warhorseLogo from "@shared/assets/images/homePage/warhorse.png";
 import gameVideo from "@shared/assets/videos/game.mp4";
+import rdr2Video from '@shared/assets/videos/rdr2.mp4';
 
 // Любимые игры студентов
 const FAVORITE_GAMES = [
@@ -165,7 +166,7 @@ export const HomePage = () => {
                 <div className="about-city-image">
                     <video
                         className="about-video"
-                        src="/src/shared/assets/videos/rdr2.mp4"
+                        src={rdr2Video}
                         autoPlay
                         loop
                         muted
