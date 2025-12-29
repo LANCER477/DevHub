@@ -91,9 +91,9 @@ export const ServicesPage = () => {
                         <div className="services-breadcrumb">
                             <Link to="/">Home</Link> &gt; <Link to="/services" className="active-breadcrumb">Services</Link>
                         </div>
-                        <h1>Lorem Ipsum is simply dummy text of the printing and.</h1>
+                        <h1>Professional Game Development & Art Services</h1>
                         <p className="hero-subtitle">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            From concept to launch, 4epuha Studio provides end-to-end solutions for your gaming projects using cutting-edge technology.
                         </p>
                     </div>
 

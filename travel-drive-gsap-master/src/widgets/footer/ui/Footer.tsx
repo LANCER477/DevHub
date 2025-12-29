@@ -8,6 +8,11 @@ import tgIcon from '@shared/assets/icons/telegram.png';
 export const Footer = () => {
     return (
         <footer className="footer-wrapper">
+            <div className="footer-top-info">
+                <h3>Collaborate with 4epuha</h3>
+                <p>We are always looking for new challenges and creative partners to push the boundaries of gaming art and design.</p>
+            </div>
+
             <div className="newsletter-section">
                 <div className="newsletter-content">
                     <h3>Stay in the loop</h3>

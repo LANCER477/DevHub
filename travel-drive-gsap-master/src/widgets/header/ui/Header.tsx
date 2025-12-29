@@ -48,7 +48,7 @@ export const Header = () => {
                 <Link to="/" className={`nav-item ${isActive('/')}`}>Home</Link>
                 <Link to="/about" className={`nav-item ${isActive('/about')}`}>About us</Link>
                 <Link to="/services" className={`nav-item ${isActive('/services')}`}>Services</Link>
-                <div className="nav-item">News</div>
+                <Link to="/news" className={`nav-item ${isActive('/news')}`}>News</Link>
                 <Link to="/store" className={`nav-item ${isActive('/store')}`}>Store</Link>
 
                 <div className="header-actions">

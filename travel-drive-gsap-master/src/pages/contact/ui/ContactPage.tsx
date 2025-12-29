@@ -82,9 +82,9 @@ export const ContactPage = () => {
                     <div className="contact-breadcrumb">
                         <Link to="/">Home</Link> <span className="breadcrumb-separator">&gt;</span> <Link to="/contact" className="active-breadcrumb">Contact us</Link>
                     </div>
-                    <h1>Lorem Ipsum is simply dummy text of the printing and.</h1>
+                    <h1>Get in Touch with 4epuha Studio</h1>
                     <p className="hero-subtitle">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Have a project in mind? We're here to help you bring your ideas to life with world-class art and design.
                     </p>
 
                     <div className="hero-decor-dot"></div>
@@ -115,7 +115,7 @@ export const ContactPage = () => {
                                         <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                                     </svg>
                                 </span>
-                                <span className="info-text-large">+94 4444 5555 8</span>
+                                <span className="info-text-large">+908 89097 890</span>
                             </div>
                         </div>
 
@@ -128,7 +128,7 @@ export const ContactPage = () => {
                                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                                     </svg>
                                 </span>
-                                <span className="info-text-large">but also the leap into electronic typesetting</span>
+                                <span className="info-text-large">Istanbul, Turkey - Global Studios</span>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@ export const ContactPage = () => {
 
                     <div className="say-hello-header">
                         <h2>Say hello</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing.</p>
+                        <p>Tell us about your project and let's build something epic together.</p>
                     </div>
 
                     <form className="contact-form" onSubmit={handleSubmit}>

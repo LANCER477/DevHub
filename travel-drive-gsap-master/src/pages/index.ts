@@ -1,6 +1,8 @@
 export { HomePage } from './home/index.ts';
-export { RegisterPage } from './register/index.ts';
-export { AboutPage } from './about/ui/AboutPage';
-export { ServicesPage } from './services/ui/ServicesPage';
-export { StorePage } from './store/ui/StorePage';
-export { ContactPage } from './contact/ui/ContactPage';
+export * from './home/ui/HomePage';
+export * from './register/ui/RegisterPage';
+export * from './about/ui/AboutPage';
+export * from './services/ui/ServicesPage';
+export * from './store/ui/StorePage';
+export * from './contact/ui/ContactPage';
+export * from './news/ui/NewsPage';

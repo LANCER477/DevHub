@@ -34,6 +34,23 @@
     line-height: 1.5;
 }
 
+.footer-top-info {
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.footer-top-info h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.footer-top-info p {
+    color: #888;
+    font-size: 16px;
+    max-width: 600px;
+}
+
 .newsletter-form {
     display: flex;
     gap: 15px;
