@@ -186,6 +186,16 @@
     display: flex;
     gap: 20px;
     align-items: center;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 16px;
+    /* Removed transition: all to prevent conflict with GSAP */
+}
+
+.side-news-item:hover {
+    transform: translateX(10px);
+    transition: transform 0.3s ease;
+    /* Specific transition for hover is safer if GSAP isn't active on hover */
 }
 
 .side-news-img {
@@ -196,7 +206,10 @@
     border-radius: 12px;
     flex-shrink: 0;
     border: 1px solid #2A211E;
+    transition: transform 0.3s ease;
 }
+
+
 
 .side-news-info h4 {
     font-size: 17px;

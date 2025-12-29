@@ -1,4 +1,7 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import './NewsPage.css';
 
 // Assets
@@ -13,6 +16,8 @@ import bfImg from '@shared/assets/images/homePage/battlefield-6.jpg';
 import logoSmall from '@shared/assets/logo/logo4epuha-white.png';
 
 export const NewsPage = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+
     const sideNews = [
         { id: 1, author: 'Nintendo News', time: '15min', title: 'Switch 2 rumors: 8-inch LCD screen and magnetic Joy-Cons?', tagColor: '#e06666', img: switchImg },
         { id: 2, author: 'E-Sports Hub', time: '1h', title: 'Faker wins 5th World Championship with T1 in London.', tagColor: '#6aa84f', img: lolImg },
@@ -23,8 +28,64 @@ export const NewsPage = () => {
         { id: 7, author: '4epuha Studio', time: '2d', title: 'New DevHub update: AI-powered asset generator for devs.', tagColor: '#FA8305', img: logoSmall }
     ];
 
+    useGSAP(() => {
+        // Hero Section Animations
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1 } });
+
+        tl.from('.news-breadcrumb', { opacity: 0, y: -20, delay: 0.2 })
+            .from('.news-hero h1', { opacity: 0, y: 30 }, '-=0.6')
+            .from('.hero-subtitle', { opacity: 0, y: 20 }, '-=0.7')
+            .from('.search-container', { opacity: 0, scale: 0.95, y: 20 }, '-=0.7')
+            .from('.hero-decor-dot', { opacity: 0, scale: 0, duration: 0.5 }, '-=0.5');
+
+        // Main Column News Cards
+        gsap.utils.toArray<HTMLElement>('.large-news-card').forEach((card) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none',
+                },
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        });
+
+        // Side Column Items
+        const sideItems = gsap.utils.toArray<HTMLElement>('.side-news-item');
+        gsap.from(sideItems, {
+            scrollTrigger: {
+                trigger: '.news-side-column',
+                start: 'top 85%',
+                once: true,
+            },
+            opacity: 0,
+            x: 50,
+            stagger: 0.1,
+            duration: 0.6,
+            ease: 'power2.out',
+            clearProps: 'all' // Ensure inline styles are cleared after animation
+        });
+
+        // Divider animations
+        gsap.from('.news-card-divider', {
+            scrollTrigger: {
+                trigger: '.news-card-divider',
+                start: 'top 90%',
+            },
+            scaleX: 0,
+            transformOrigin: 'left center',
+            duration: 1.5,
+            ease: 'power4.out',
+            stagger: 0.3
+        });
+
+    }, { scope: containerRef });
+
     return (
-        <div className="news-page">
+        <div className="news-page" ref={containerRef}>
             <div className="wrapper">
                 <section className="news-hero">
                     <div className="news-breadcrumb">
@@ -51,7 +112,7 @@ export const NewsPage = () => {
                 <div className="news-content-layout">
                     {/* LEFT COLUMN */}
                     <div className="news-main-column">
-                        <div className="large-news-card" data-aos="fade-up">
+                        <div className="large-news-card">
                             <img src={gtaImg} alt="GTA VI" className="large-card-img" />
                             <div className="card-info">
                                 <div className="card-meta">
@@ -67,7 +128,7 @@ export const NewsPage = () => {
 
                         <div className="news-card-divider"></div>
 
-                        <div className="large-news-card" data-aos="fade-up">
+                        <div className="large-news-card">
                             <img src={ps5Img} alt="PS5 Pro" className="large-card-img" />
                             <div className="card-info">
                                 <div className="card-meta">
@@ -92,7 +153,7 @@ export const NewsPage = () => {
                     {/* RIGHT COLUMN */}
                     <div className="news-side-column">
                         {sideNews.map((news) => (
-                            <div key={news.id} className="side-news-item" data-aos="fade-left">
+                            <Link key={news.id} to="/news" className="side-news-item">
                                 <img src={news.img} alt={news.title} className="side-news-img" />
                                 <div className="side-news-info">
                                     <div className="side-meta">
@@ -101,7 +162,7 @@ export const NewsPage = () => {
                                     </div>
                                     <h4>{news.title}</h4>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

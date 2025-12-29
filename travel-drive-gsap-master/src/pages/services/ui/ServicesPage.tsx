@@ -1,12 +1,15 @@
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import mehImg from "@shared/assets/images/servicesPage/meh.jpg";
 import modelImg from "@shared/assets/images/servicesPage/model.png";
 import levelImg from "@shared/assets/images/servicesPage/level.jpg";
 import "./ServicesPage.css";
 import videoNinja from "@shared/assets/videos/wh.mp4";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 export const ServicesPage = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
     const testimonials = [
         {
             name: "Viezh Robert",
@@ -52,6 +55,59 @@ export const ServicesPage = () => {
     const maxIndex = Math.max(0, testimonials.length - testimonialsPerPage);
     const totalPages = maxIndex + 1;
 
+    useGSAP(() => {
+        // Hero Section
+        const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
+        tl.from(".services-breadcrumb", { opacity: 0, y: -20, delay: 0.2 })
+            .from(".services-hero-content h1", { opacity: 0, y: 30 }, "-=0.7")
+            .from(".services-hero-content .hero-subtitle", { opacity: 0, y: 20 }, "-=0.7")
+            .from(".stat-card", { opacity: 0, y: 20, stagger: 0.15 }, "-=0.5")
+            .from(".stat-divider", { scaleY: 0, opacity: 0, stagger: 0.15 }, "-=0.5");
+
+        // Video Feature
+        gsap.from(".video-feature-media, .video-feature-content > *", {
+            scrollTrigger: {
+                trigger: ".video-feature",
+                start: "top 85%",
+            },
+            opacity: 0,
+            y: 30,
+            stagger: 0.2,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Content Blocks - Individual triggers
+        const blocks = gsap.utils.toArray<HTMLElement>(".content-block");
+        blocks.forEach((block) => {
+            gsap.from(block.querySelectorAll(".block-text > *, .block-media"), {
+                scrollTrigger: {
+                    trigger: block,
+                    start: "top 85%",
+                },
+                opacity: 0,
+                y: 30,
+                stagger: 0.2,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Testimonials
+        gsap.from(".testimonials h2, .testimonials p, .testimonial-card, .testimonials-nav", {
+            scrollTrigger: {
+                trigger: ".testimonials",
+                start: "top 85%",
+            },
+            opacity: 0,
+            y: 30,
+            stagger: 0.2,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+    }, { scope: containerRef });
+
     const handlePrevTestimonial = () => {
         if (isTransitioning) return;
         setIsTransitioning(true);
@@ -82,11 +138,11 @@ export const ServicesPage = () => {
     const visibleTestimonials = testimonials.slice(currentTestimonial, currentTestimonial + testimonialsPerPage);
     const currentPage = currentTestimonial;
     return (
-        <div className="services-page">
+        <div className="services-page" ref={containerRef}>
             <div className="wrapper">
 
                 {/* HERO & STATS */}
-                <section className="services-hero" data-aos="fade-down">
+                <section className="services-hero">
                     <div className="services-hero-content">
                         <div className="services-breadcrumb">
                             <Link to="/">Home</Link> &gt; <Link to="/services" className="active-breadcrumb">Services</Link>
@@ -143,7 +199,7 @@ export const ServicesPage = () => {
                 </section>
 
                 {/* VIDEO FEATURE */}
-                <section className="video-feature" data-aos="fade-up">
+                <section className="video-feature">
                     <div className="video-feature-media">
                         <video src={videoNinja} autoPlay muted loop playsInline />
                     </div>
@@ -163,7 +219,7 @@ export const ServicesPage = () => {
                 </section>
 
                 {/* ALTERNATING BLOCKS 1 */}
-                <section className="content-block" data-aos="fade-right">
+                <section className="content-block">
                     <div className="block-text">
                         <h2>Level Design & Environment Art</h2>
                         <p>
@@ -173,12 +229,11 @@ export const ServicesPage = () => {
                     </div>
                     <div className="block-media">
                         <img src={levelImg} alt="Environment Art" />
-
                     </div>
                 </section>
 
                 {/* ALTERNATING BLOCKS 2 */}
-                <section className="content-block reverse" data-aos="fade-left">
+                <section className="content-block reverse">
                     <div className="block-text">
                         <h2>Character Modeling & Animation</h2>
                         <p>
@@ -192,7 +247,7 @@ export const ServicesPage = () => {
                 </section>
 
                 {/* ALTERNATING BLOCKS 3 */}
-                <section className="content-block" data-aos="fade-right">
+                <section className="content-block">
                     <div className="block-text">
                         <h2>Game Mechanics & Programming</h2>
                         <p>
@@ -206,7 +261,7 @@ export const ServicesPage = () => {
                 </section>
 
                 {/* TESTIMONIALS */}
-                <section className="testimonials" data-aos="fade-up">
+                <section className="testimonials">
                     <h2>Trusted by Thousands of Happy Customers</h2>
                     <p>See what the industry says about us.</p>
                     <div className="testimonials-carousel">

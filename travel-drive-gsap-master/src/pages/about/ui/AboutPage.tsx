@@ -1,3 +1,7 @@
+import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import "./AboutPage.css";
 import imageIlya from "@shared/assets/images/aboutPage/ilya.jpeg";
 import imageIvan from "@shared/assets/images/aboutPage/ivan.jpeg";
@@ -6,24 +10,53 @@ import imageYarik from "@shared/assets/images/aboutPage/yarik.jpeg";
 import videoAvatar from "@shared/assets/videos/avatar.mp4";
 import videoRdr2 from "@shared/assets/videos/sifu.mp4";
 import videoDevs from "@shared/assets/videos/devs.mp4";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 
 export const AboutPage = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
     const videos = [videoAvatar, videoRdr2];
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
 
     const nextIndex = (currentIndex + 1) % videos.length;
 
+    useGSAP(() => {
+        // Hero Section
+        const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
+        tl.from(".about-breadcrumb", { opacity: 0, y: -20, delay: 0.2 })
+            .from(".about-hero-content h1", { opacity: 0, y: 30 }, "-=0.7")
+            .from(".about-hero-content p", { opacity: 0, y: 20 }, "-=0.7")
+            .from(".about-hero-btn", { opacity: 0, scale: 0.9, y: 10 }, "-=0.7")
+            .from(".about-hero-right", { opacity: 0, x: 50 }, "-=1");
+
+        // Section Animations
+        const animateOnScroll = (trigger: string, items: string, x = 0) => {
+            gsap.from(items, {
+                scrollTrigger: {
+                    trigger: trigger,
+                    start: "top 85%",
+                },
+                opacity: 0,
+                y: 30,
+                x: x,
+                stagger: 0.2,
+                duration: 1,
+                ease: "power3.out"
+            });
+        };
+
+        animateOnScroll(".why-us", ".why-us-header h2, .why-card");
+        animateOnScroll(".info-section", ".info-image, .info-content > *", -30);
+        animateOnScroll(".team-section", ".team-section h2, .team-card");
+
+    }, { scope: containerRef });
+
     const handleNext = () => {
         if (isAnimating) return;
         setIsAnimating(true);
-        // Simple delay to allow transition, then switch index
         setTimeout(() => {
             setCurrentIndex(nextIndex);
             setIsAnimating(false);
-        }, 600); // Match CSS transition
+        }, 600);
     };
 
     const handlePrev = () => {
@@ -36,10 +69,10 @@ export const AboutPage = () => {
     };
 
     return (
-        <div className="about-page">
+        <div className="about-page" ref={containerRef}>
             <div className="wrapper">
                 {/* HERO SECTION */}
-                <section className="about-hero" data-aos="fade-up">
+                <section className="about-hero">
                     <div className="about-hero-content">
                         <div className="about-breadcrumb">
                             <Link to="/">Home</Link> &gt; <Link to="/about" className="active-breadcrumb">About us</Link>
@@ -55,9 +88,9 @@ export const AboutPage = () => {
                             {videos.map((src, index) => {
                                 let className = "slider-video";
                                 if (index === currentIndex && !isAnimating) className += " active";
-                                if (index === nextIndex && !isAnimating) className += " next-bg"; // Background preview
-                                if (isAnimating && index === currentIndex) className += " slide-out"; // Animate old active away
-                                if (isAnimating && index === nextIndex) className += " slide-in"; // Animate new to active
+                                if (index === nextIndex && !isAnimating) className += " next-bg";
+                                if (isAnimating && index === currentIndex) className += " slide-out";
+                                if (isAnimating && index === nextIndex) className += " slide-in";
 
                                 return (
                                     <video
@@ -81,7 +114,7 @@ export const AboutPage = () => {
                 </section>
 
                 {/* WHY WORK WITH US */}
-                <section className="why-us" data-aos="fade-up">
+                <section className="why-us">
                     <div className="why-us-header">
                         <h2>Why work with us</h2>
                     </div>
@@ -112,7 +145,7 @@ export const AboutPage = () => {
 
 
                 {/* INFO SECTION */}
-                <section className="info-section" data-aos="fade-right">
+                <section className="info-section">
                     <div className="info-image">
                         <video
                             src={videoDevs}
@@ -120,7 +153,7 @@ export const AboutPage = () => {
                             loop
                             muted
                             playsInline
-                            className="info-video" // New class for styling
+                            className="info-video"
                         />
                     </div>
                     <div className="info-content">
@@ -133,7 +166,7 @@ export const AboutPage = () => {
                 </section>
 
                 {/* OUR TEAM */}
-                <section className="team-section" data-aos="fade-up">
+                <section className="team-section">
                     <h2>Our Team</h2>
                     <div className="team-grid">
                         <a href="https://github.com/Cennge" target="_blank" rel="noopener noreferrer" className="team-card">

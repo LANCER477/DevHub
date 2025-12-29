@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import './ContactPage.css';
+// ... imports remain the same ...
 import xIcon from '@shared/assets/logo/X.jpg';
 import instIcon from '@shared/assets/logo/inst.jpg';
 import ytIcon from '@shared/assets/logo/youtube.jpg';
@@ -24,6 +27,7 @@ interface FormErrors {
 }
 
 export const ContactPage = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
     const [formData, setFormData] = useState<FormState>({
         firstName: '',
         lastName: '',
@@ -34,6 +38,30 @@ export const ContactPage = () => {
     const [errors, setErrors] = useState<FormErrors>({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+
+    useGSAP(() => {
+        // Hero Section
+        const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
+        tl.from(".contact-breadcrumb", { opacity: 0, y: -20, delay: 0.2 })
+            .from(".contact-hero h1", { opacity: 0, y: 30 }, "-=0.7")
+            .from(".contact-hero .hero-subtitle", { opacity: 0, y: 20 }, "-=0.7")
+            .from(".map-showcase", { opacity: 0, scale: 0.8, duration: 1.5 }, "-=0.5")
+            .from(".contact-info-row-refined > *", { opacity: 0, y: 20, stagger: 0.2 }, "-=1");
+
+        // Say Hello Section
+        gsap.from(".say-hello-section > *", {
+            scrollTrigger: {
+                trigger: ".say-hello-section",
+                start: "top 80%",
+            },
+            opacity: 0,
+            y: 30,
+            stagger: 0.15,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+    }, { scope: containerRef });
 
     const validate = (): boolean => {
         const newErrors: FormErrors = {};
@@ -74,7 +102,7 @@ export const ContactPage = () => {
     };
 
     return (
-        <div className="contact-page">
+        <div className="contact-page" ref={containerRef}>
             <div className="wrapper">
 
                 {/* HERO SECTION */}

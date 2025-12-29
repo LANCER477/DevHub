@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import "./HomePage.css";
+// ... imports remain the same ...
 import heroImage from "@shared/assets/images/homePage/gamepad_hero.png";
 import logoUnity from "@shared/assets/logo/unity.svg";
 import logoCry from "@shared/assets/logo/cryengine.svg";
@@ -41,12 +44,41 @@ const COMPANIES = [
 const LOGOS_PER_PAGE = 3;
 const TOTAL_LOGO_PAGES = Math.ceil(COMPANIES.length / LOGOS_PER_PAGE);
 
-
-
 export const HomePage = () => {
-
-    // слайдер компаний
+    const containerRef = useRef<HTMLDivElement>(null);
     const [currentLogoPage, setCurrentLogoPage] = useState(0);
+
+    useGSAP(() => {
+        // Hero Section
+        const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1 } });
+        tl.from(".hero-content .subtitle", { opacity: 0, x: -30, delay: 0.2 })
+            .from(".hero-title", { opacity: 0, y: 30 }, "-=0.7")
+            .from(".hero-description", { opacity: 0, y: 20 }, "-=0.7")
+            .from(".btn-primary", { opacity: 0, scale: 0.9, y: 10 }, "-=0.7")
+            .from(".hero-main-img", { opacity: 0, x: 50, scale: 0.95 }, "-=1")
+            .from(".floating-logo", { opacity: 0, scale: 0, stagger: 0.2, duration: 0.8 }, "-=0.5");
+
+        // Section Headings & Text
+        const animateOnScroll = (trigger: string, items: string) => {
+            gsap.from(items, {
+                scrollTrigger: {
+                    trigger: trigger,
+                    start: "top 80%",
+                },
+                opacity: 0,
+                y: 30,
+                stagger: 0.2,
+                duration: 1,
+                ease: "power3.out"
+            });
+        };
+
+        animateOnScroll(".trending", ".section-header h2, .section-header .btn-secondary, .game-card");
+        animateOnScroll(".about", ".about-text-center h3, .about-text-center p, .about-city-image");
+        animateOnScroll(".features-section", ".features-intro h3, .features-intro p, .feature-item");
+        animateOnScroll(".projects", ".section-header-center h2, .section-header-center p, .companies-slider, .projects-action");
+
+    }, { scope: containerRef });
 
     const handlePrevLogos = () => {
         setCurrentLogoPage((prev) =>
@@ -71,7 +103,7 @@ export const HomePage = () => {
     );
 
     return (
-        <div className="home">
+        <div className="home" ref={containerRef}>
             {/* HERO SECTION */}
             <section className="hero wrapper">
                 <div className="hero-content">
@@ -150,13 +182,7 @@ export const HomePage = () => {
             </section>
 
             {/* ABOUT / LOREM IPSUM SECTION */}
-            <section
-                className="about wrapper"
-                data-aos="fade-right"
-                data-aos-offset="300"
-                data-aos-easing="ease-in-sine"
-                data-aos-duration="2000"
-            >
+            <section className="about wrapper">
                 <div className="about-text-center">
                     <h3>Building Virtual Worlds</h3>
                     <p>
@@ -173,13 +199,10 @@ export const HomePage = () => {
                         playsInline
                     />
                 </div>
-
             </section>
 
             {/* FEATURES SECTION */}
-            <section
-                className="features-section"
-            >
+            <section className="features-section">
                 <video
                     className="features-bg-video"
                     src={gameVideo}
@@ -189,13 +212,7 @@ export const HomePage = () => {
                     playsInline
                 />
                 <div className="wrapper">
-                    <div
-                        className="features-intro"
-                        data-aos="fade-left"
-                        data-aos-offset="300"
-                        data-aos-easing="ease-in-sine"
-                        data-aos-duration="1000"
-                    >
+                    <div className="features-intro">
                         <h3>Expertise in Every Dimension</h3>
                         <p>
                             From mobile hits to AAA console titles, our diverse team covers every aspect of modern game development.
@@ -205,7 +222,7 @@ export const HomePage = () => {
                     <div className="features-grid-container">
                         <div className="features-row">
                             {/* Mobile Game Dev */}
-                            <div className="feature-item" data-aos="fade-up" data-aos-delay="100">
+                            <div className="feature-item">
                                 <div className="feature-icon-circle">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                                 </div>
@@ -213,7 +230,7 @@ export const HomePage = () => {
                                 <span className="arrow">→</span>
                             </div>
                             {/* PC Game Dev */}
-                            <div className="feature-item" data-aos="fade-up" data-aos-delay="200">
+                            <div className="feature-item">
                                 <div className="feature-icon-circle">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
                                 </div>
@@ -221,7 +238,7 @@ export const HomePage = () => {
                                 <span className="arrow">→</span>
                             </div>
                             {/* PS4 Game Dev */}
-                            <div className="feature-item" data-aos="fade-up" data-aos-delay="300">
+                            <div className="feature-item">
                                 <div className="feature-icon-circle">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><line x1="6" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="18" y2="12"></line></svg>
                                 </div>
@@ -229,12 +246,9 @@ export const HomePage = () => {
                                 <span className="arrow">→</span>
                             </div>
                             {/* AR/VR Solutions */}
-                            <div className="feature-item" data-aos="fade-up" data-aos-delay="400">
+                            <div className="feature-item">
                                 <div className="feature-icon-circle">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 1.75a.25.25 0 0 0-.48 0L3.41 21.84a2 2 0 0 0 1.93 1.46H18c1.1 0 2-.9 2-2V3a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v19h20Z"></path></svg>
-                                    {/* Simplified VR icon placeholder */}
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'none' }}><circle cx="12" cy="12" r="10"></circle></svg>
-                                    {/* Использую очки */}
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 10V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V10"></path><path d="M3 10L9 12L12 10L15 12L21 10"></path></svg>
                                 </div>
                                 <span>AR/VR Solutions</span>
@@ -244,7 +258,7 @@ export const HomePage = () => {
 
                         <div className="features-row-center">
                             {/* AR/VR Design */}
-                            <div className="feature-item" data-aos="fade-up" data-aos-delay="500">
+                            <div className="feature-item">
                                 <div className="feature-icon-circle">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 12a4 4 0 1 0 8 0 4 4 0 1 0-8 0"></path></svg>
                                 </div>
@@ -252,7 +266,7 @@ export const HomePage = () => {
                                 <span className="arrow">→</span>
                             </div>
                             {/* 3D Modeling */}
-                            <div className="feature-item" data-aos="fade-up" data-aos-delay="600">
+                            <div className="feature-item">
                                 <div className="feature-icon-circle">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                                 </div>
