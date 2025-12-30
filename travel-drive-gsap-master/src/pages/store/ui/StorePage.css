@@ -33,3 +33,9 @@
     font-size: 48px;
     margin-bottom: 20px;
 }
+
+@media (max-width: 768px) {
+    .store-hero h1 {
+        font-size: 32px;
+    }
+}

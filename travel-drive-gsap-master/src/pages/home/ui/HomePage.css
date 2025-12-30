@@ -99,8 +99,8 @@
 }
 
 .logo-img {
-    width: 90px;
-    height: 160px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
     filter: brightness(0) invert(1);
     /* Make black SVGs white */
@@ -115,32 +115,33 @@
     color: #fff;
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 16px;
-}
-
-.floating-logo svg {
-    width: 30px;
-    height: 30px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 12px;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
 }
 
 /* Positioning logos around the gamepad */
 .unity {
-    left: 0;
-    top: 50%;
+    left: 40px;
+    top: 40%;
     transform: translateY(-50%);
 }
 
 .cryengine {
-    top: 10%;
-    left: 20%;
+    top: 40px;
+    left: 25%;
     flex-direction: column;
     gap: 4px;
     font-size: 12px;
 }
 
 .unreal {
-    top: 10%;
-    right: 10%;
+    top: 50px;
+    right: 3%;
     flex-direction: column;
     align-items: center;
 }
@@ -158,36 +159,6 @@
     letter-spacing: 1px;
 }
 
-@media (max-width: 900px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        gap: 60px;
-    }
-
-    .hero-image-container {
-        width: 100%;
-    }
-
-    .hero-main-img {
-        width: 80%;
-    }
-
-    /* Adjust logos for mobile */
-    .unity {
-        left: 0;
-    }
-
-    .cryengine {
-        left: 10%;
-        top: 0;
-    }
-
-    .unreal {
-        right: 10%;
-        top: 0;
-    }
-}
 
 /* --- TRENDING GAMES --- */
 .trending {
@@ -529,44 +500,6 @@
 }
 
 
-@media (max-width: 1024px) {
-
-    .features-row,
-    .features-row-center {
-        gap: 30px;
-    }
-}
-
-@media (max-width: 768px) {
-
-    .features-intro h3 {
-        font-size: 28px;
-        line-height: 1.2;
-    }
-
-    .features-intro p {
-        font-size: 16px;
-        line-height: 1.5;
-    }
-
-    .features-row,
-    .features-row-center {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .feature-item {
-        width: auto;
-    }
-
-    .about-text-center h3 {
-        font-size: 28px;
-    }
-
-    .about-text-center p {
-        font-size: 16px;
-    }
-}
 
 /* --- PROJECTS SECTION --- */
 .projects {
@@ -797,7 +730,86 @@
     background: rgba(255, 255, 255, 0.35);
 }
 
+/* --- RESPONSIVE STYLES --- */
+@media (max-width: 1200px) {
+    .hero-title {
+        font-size: 56px;
+    }
+
+    .hero-main-img {
+        width: 500px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        padding: 0 30px;
+    }
+
+    .hero-title {
+        font-size: 48px;
+    }
+
+    .hero-main-img {
+        width: 400px;
+    }
+
+    .floating-logo {
+        display: none;
+        /* Hide floating logos on tablet and mobile as they overlap the gamepad */
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .project-item:nth-child(n) {
+        transform: none !important;
+        aspect-ratio: 16/10;
+    }
+
+    .features-row,
+    .features-row-center {
+        gap: 30px;
+    }
+}
+
 @media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 140px;
+        min-height: auto;
+        gap: 40px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero-description {
+        margin: 0 auto 30px;
+    }
+
+    .hero-image-container {
+        width: 100%;
+    }
+
+    .hero-main-img {
+        width: 80%;
+        max-width: 450px;
+    }
+
+    .about-text-center h3 {
+        font-size: 32px;
+    }
+
+    .features-intro h3 {
+        font-size: 36px;
+    }
+
     .companies-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -807,20 +819,73 @@
     }
 }
 
-@media (max-width: 900px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
     }
 
-    .project-item:nth-child(n) {
-        transform: none !important;
-        /* Reset offsets on tablet */
-        aspect-ratio: 16/10;
+    .trending {
+        padding: 60px 20px;
+    }
+
+    .trending-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        padding: 60px 20px;
+    }
+
+    .features-section {
+        padding: 80px 0;
+    }
+
+    .features-grid-container {
+        gap: 40px;
+    }
+
+    .features-row,
+    .features-row-center {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .feature-item {
+        width: 100%;
+    }
+
+    .companies-slider {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .section-header-center h2 {
+        font-size: 32px;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 36px;
+    }
+
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .companies-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-video,
+    .about-city-image img {
+        border-radius: 12px;
+    }
+
+    .wrapper {
+        padding: 0 20px;
     }
 }

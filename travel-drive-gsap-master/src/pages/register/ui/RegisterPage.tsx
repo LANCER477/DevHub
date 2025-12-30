@@ -10,8 +10,11 @@ export const RegisterPage = () => {
     }, { scope: containerRef });
 
     return (
-        <div ref={containerRef} style={{ padding: '100px 0', textAlign: 'center' }}>
-            <h1>Register Page</h1>
+        <div ref={containerRef} className="register-page" style={{ padding: '160px 0 100px', textAlign: 'center' }}>
+            <div className="wrapper">
+                <h1>Register Page</h1>
+                <p style={{ marginTop: '20px', color: '#888' }}>This feature is coming soon.</p>
+            </div>
         </div>
     );
 };
