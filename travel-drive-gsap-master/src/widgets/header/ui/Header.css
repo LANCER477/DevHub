@@ -49,6 +49,12 @@
     height: 100%;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 .nav-item {
     position: relative;
     display: flex;
@@ -224,6 +230,11 @@
 
     .nav-item {
         font-size: 24px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 30px;
     }
 
     .header-actions {

@@ -6,3 +6,4 @@ export * from './services/ui/ServicesPage';
 export * from './store/ui/StorePage';
 export * from './contact/ui/ContactPage';
 export * from './news/ui/NewsPage';
+export * from './cart/ui/CartPage';

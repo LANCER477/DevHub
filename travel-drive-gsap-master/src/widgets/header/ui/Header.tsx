@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { useEffect } from "react";
+import { useState, useEffect } from 'react';
 import './Header.css';
 import logo from '@shared/assets/logo/logo4epuha-white.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useCart } from '@app/providers/CartContext';
 
 export const Header = () => {
-
     const [scrolled, setScrolled] = useState(false);
+    const { totalCount } = useCart();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -17,8 +17,6 @@ export const Header = () => {
         window.addEventListener("scroll", onScroll);
         return () => window.removeEventListener("scroll", onScroll);
     }, []);
-
-
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
@@ -35,7 +33,6 @@ export const Header = () => {
                 <Link to="/" className="logo">
                     <img src={logo} alt="logo" />
                 </Link>
-                {/* <span className="logo-text">TRAVEL WITH 4EPUHA</span> */}
             </div>
 
             <div className={`burger-btn ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
@@ -45,11 +42,13 @@ export const Header = () => {
             </div>
 
             <div className={`header-right ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
-                <Link to="/" className={`nav-item ${isActive('/')}`}>Home</Link>
-                <Link to="/about" className={`nav-item ${isActive('/about')}`}>About us</Link>
-                <Link to="/services" className={`nav-item ${isActive('/services')}`}>Services</Link>
-                <Link to="/news" className={`nav-item ${isActive('/news')}`}>News</Link>
-                <Link to="/store" className={`nav-item ${isActive('/store')}`}>Store</Link>
+                <nav className="nav-links">
+                    <Link to="/" className={`nav-item ${isActive('/')}`}>Home</Link>
+                    <Link to="/about" className={`nav-item ${isActive('/about')}`}>About us</Link>
+                    <Link to="/services" className={`nav-item ${isActive('/services')}`}>Services</Link>
+                    <Link to="/news" className={`nav-item ${isActive('/news')}`}>News</Link>
+                    <Link to="/store" className={`nav-item ${isActive('/store')}`}>Store</Link>
+                </nav>
 
                 <div className="header-actions">
                     <div className="search-bar">
@@ -60,13 +59,13 @@ export const Header = () => {
                         </svg>
                     </div>
 
-                    <Link to="/store" className="cart-btn">
+                    <Link to="/cart" className="cart-btn" id="header-cart">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
-                        <span className="cart-badge">1</span>
+                        {totalCount > 0 && <span className="cart-badge">{totalCount}</span>}
                     </Link>
                 </div>
 
