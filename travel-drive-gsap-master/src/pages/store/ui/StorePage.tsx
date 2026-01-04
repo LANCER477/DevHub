@@ -87,7 +87,7 @@ export const StorePage = () => {
         tl.from(".store-breadcrumb", { opacity: 0, y: -20, delay: 0.2 })
             .from(".store-hero-content h1", { opacity: 0, y: 30 }, "-=0.7")
             .from(".store-hero-content p", { opacity: 0, y: 20 }, "-=0.7")
-            .from(".store-hero-content p", { opacity: 0, y: 20 }, "-=0.7");
+
 
         // Fixed Category Animation
         gsap.fromTo(".category-card",
