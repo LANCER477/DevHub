@@ -780,7 +780,8 @@
     .hero {
         flex-direction: column;
         text-align: center;
-        padding-top: 140px;
+        padding-top: 180px;
+        /* Increased to ensure content is not hidden behind header */
         min-height: auto;
         gap: 40px;
     }
@@ -828,6 +829,8 @@
 
     .trending {
         padding: 60px 20px;
+        margin-bottom: 60px;
+        /* Added spacing between Trending and About/Building Worlds */
     }
 
     .trending-grid {

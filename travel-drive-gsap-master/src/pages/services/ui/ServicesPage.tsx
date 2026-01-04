@@ -267,7 +267,7 @@ export const ServicesPage = () => {
                     <div className="testimonials-carousel">
                         <div className="testimonials-grid">
                             {visibleTestimonials.map((testimonial, index) => (
-                                <div key={currentTestimonial + index} className="testimonial-card">
+                                <div key={index} className="testimonial-card">
                                     <div className="testimonial-header">
                                         <img src={testimonial.avatar} alt={testimonial.name} className="testimonial-avatar" />
                                         <div>

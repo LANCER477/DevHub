@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import "./HomePage.css";
@@ -47,6 +47,11 @@ const TOTAL_LOGO_PAGES = Math.ceil(COMPANIES.length / LOGOS_PER_PAGE);
 export const HomePage = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [currentLogoPage, setCurrentLogoPage] = useState(0);
+
+    // Force scroll to top on mount to solve "starting lower" issue
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useGSAP(() => {
         // Hero Section

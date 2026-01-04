@@ -278,6 +278,10 @@
     text-align: left;
     border: 1px solid #222;
     transition: transform 0.3s ease;
+    min-height: 280px;
+    /* Fix for jumping slider */
+    display: flex;
+    flex-direction: column;
 }
 
 .testimonial-card p {

@@ -11,12 +11,13 @@ export interface Product {
 
 interface CartItem extends Product {
     quantity: number;
+    size?: string;
 }
 
 interface CartContextType {
     cartItems: CartItem[];
-    addToCart: (product: Product) => void;
-    removeFromCart: (productId: number) => void;
+    addToCart: (product: Product, size?: string) => void;
+    removeFromCart: (productId: number, size?: string) => void;
     clearCart: () => void;
     totalCount: number;
     totalPrice: number;
@@ -34,20 +35,22 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         localStorage.setItem('devhub_cart', JSON.stringify(cartItems));
     }, [cartItems]);
 
-    const addToCart = (product: Product) => {
+    const addToCart = (product: Product, size?: string) => {
         setCartItems(prev => {
-            const existing = prev.find(item => item.id === product.id);
+            const existing = prev.find(item => item.id === product.id && item.size === size);
             if (existing) {
                 return prev.map(item =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+                    (item.id === product.id && item.size === size)
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
                 );
             }
-            return [...prev, { ...product, quantity: 1 }];
+            return [...prev, { ...product, quantity: 1, size }];
         });
     };
 
-    const removeFromCart = (productId: number) => {
-        setCartItems(prev => prev.filter(item => item.id !== productId));
+    const removeFromCart = (productId: number, size?: string) => {
+        setCartItems(prev => prev.filter(item => !(item.id === productId && item.size === size)));
     };
 
     const clearCart = () => {

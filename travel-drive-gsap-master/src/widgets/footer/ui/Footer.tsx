@@ -59,12 +59,12 @@ export const Footer = () => {
                     <div className="social-icon"><img src={instIcon} alt="Instagram" /></div>
                     <div className="social-icon"><img src={xIcon} alt="X" /></div>
                     <div className="social-icon"><img src={ytIcon} alt="YouTube" /></div>
-                    <div className="social-icon"><img src={tgIcon} alt="Telegram" /></div>
+                    <div className="social-icon telegram"><img src={tgIcon} alt="Telegram" /></div>
                 </div>
             </div>
 
             <div className="copyright">
-                Copyright ® 2021 4epuha All rights Reserved
+                Copyright ® 2023 4epuha All rights Reserved
             </div>
         </footer>
     );

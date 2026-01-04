@@ -286,6 +286,21 @@
 
 .product-card {
     position: relative;
+    text-decoration: none !important;
+    display: block;
+    color: inherit !important;
+}
+
+.product-card:hover,
+.product-card:focus,
+.product-card:active,
+.product-card:visited {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.product-card * {
+    text-decoration: none !important;
 }
 
 .product-image {

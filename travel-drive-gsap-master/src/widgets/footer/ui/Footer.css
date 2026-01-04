@@ -36,7 +36,15 @@
 
 .footer-top-info {
     margin-bottom: 60px;
-    text-align: left;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Brighten Telegram Icon */
+.social-icon.telegram img {
+    filter: brightness(3) saturate(0.8);
 }
 
 .footer-top-info h3 {

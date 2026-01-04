@@ -377,6 +377,19 @@
     .about-hero {
         flex-direction: column;
         text-align: center;
+        padding-top: 100px;
+        /* added some top padding to clear header if needed */
+        gap: 40px;
+    }
+
+    .about-hero-content {
+        max-width: 100%;
+    }
+
+    /* Ensure video takes full width on mobile/tablet */
+    .about-hero-right {
+        max-width: 100%;
+        width: 100%;
     }
 
     .why-cards,
@@ -391,6 +404,15 @@
 }
 
 @media (max-width: 600px) {
+
+    /* Reduce side padding on mobile to give more space for content */
+    .wrapper {
+        padding: 0 20px;
+    }
+
+    .about-hero h1 {
+        font-size: 36px;
+    }
 
     .why-cards,
     .team-grid {

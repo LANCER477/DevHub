@@ -9,14 +9,6 @@ export const CartPage = () => {
     const navigate = useNavigate();
 
     useGSAP(() => {
-        gsap.from(".cart-item", {
-            opacity: 0,
-            x: -20,
-            stagger: 0.1,
-            duration: 0.6,
-            ease: "power2.out"
-        });
-
         gsap.from(".cart-summary", {
             opacity: 0,
             y: 20,
@@ -24,7 +16,7 @@ export const CartPage = () => {
             delay: 0.3,
             ease: "power2.out"
         });
-    }, [cartItems.length]);
+    }, []);
 
     if (cartItems.length === 0) {
         return (
@@ -49,17 +41,18 @@ export const CartPage = () => {
             </div>
 
             <div className="cart-container">
-                <div className="cart-items-list">
-                    {cartItems.map((item) => (
-                        <div key={item.id} className="cart-item">
+                <div className="cart-items-list" data-lenis-prevent>
+                    {cartItems.map((item, index) => (
+                        <div key={`${item.id}-${item.size || 'def'}-${index}`} className="cart-item">
                             <div className="item-image">
                                 <img src={item.image} alt={item.name} />
                             </div>
                             <div className="item-details">
                                 <span className="item-category">{item.category}</span>
                                 <h3>{item.name}</h3>
+                                {item.size && <span className="item-size-badge">Size: {item.size}</span>}
                                 <div className="item-actions">
-                                    <button className="btn-remove" onClick={() => removeFromCart(item.id)}>
+                                    <button className="btn-remove" onClick={() => removeFromCart(item.id, item.size)}>
                                         Remove
                                     </button>
                                 </div>
